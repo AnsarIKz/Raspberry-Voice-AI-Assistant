@@ -15,7 +15,7 @@ def main():
     args = parser.parse_args()
 
     logging.info('Init language %s...', args.language)
-    text_to_speech.say_text("Добро пожаловать я ассистент Акиф. Я могу ответить на твои вопросы")
+    text_to_speech.say_text("Hi, i Am Akif assistaint. Do you have problems?")
 
 
 
