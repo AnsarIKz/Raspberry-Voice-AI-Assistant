@@ -20,7 +20,7 @@ class VoskRecognizer(sr.Recognizer):
         if show_all:
             return result
         else:
-            return result["text"]
+            return result
 
 def recognize_audio():
     recognizer = VoskRecognizer()
