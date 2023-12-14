@@ -13,7 +13,8 @@ def init():
 
 class VoskRecognizer(sr.Recognizer):
     def recognize_vosk(self, audio_data, language="en-US", show_all=False):
-        vosk_recognizer = KaldiRecognizer(model, model.get_sample_frequency())
+        print(model)
+        vosk_recognizer = KaldiRecognizer(model, model.sample_frequency())
         result = vosk_recognizer.AcceptWaveform(audio_data.frame_data)
 
         if show_all:
