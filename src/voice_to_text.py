@@ -6,17 +6,23 @@ import vosk
 def recognize_audio(model_path):
     recognizer = sr.Recognizer()
 
+    # Load Vosk model
     model = vosk.Model(model_path)
-    recognizer.recognize_vosk = lambda audio_data, language="en-US", show_all=False: model.decode(audio_data, model.get_sample_frequency())
-    
+
+    # Create Vosk recognizer
+    vosk_recognizer = vosk.KaldiRecognizer(model, model.get_sample_frequency())
+
     with sr.Microphone() as source:
         print("Say something:")
         audio_data = recognizer.listen(source)
 
     try:
-        result = recognizer.recognize_vosk(audio_data)
-        print("You said:", result)
-        return result
+        # Perform Vosk recognition
+        result = vosk_recognizer.Recognize(audio_data.frame_data, 0)
+        result_text = result["text"]
+        
+        print("You said:", result_text)
+        return result_text
     except sr.UnknownValueError:
         print("Sorry, could not understand audio.")
         return None
