@@ -1,8 +1,19 @@
 from flask import Flask, render_template
 import platform
 import subprocess
+import psutil
+import requests
+
+THINGSPEAK_API_KEY = 'DD6SO7KDVHVT2IEY'
 
 app = Flask(__name__, template_folder = 'template')
+
+def memory_usage_task():
+    """Фоновая задача для отправки информации о занятой памяти."""
+    while True:
+        memory_usage = psutil.virtual_memory().percent
+        requests.post(f'https://api.thingspeak.com/update?api_key={THINGSPEAK_API_KEY}&field1={(memory_usage)}')
+        time.sleep(30)
 
 @app.route('/')
 def index():
@@ -22,4 +33,5 @@ def shutdown():
     return None
 
 if __name__ == '__main__':
+    memory_thread = threading.Thread(target=memory_usage_task)
     app.run(debug=True, host='0.0.0.0')
