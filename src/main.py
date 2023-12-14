@@ -3,6 +3,8 @@ import argparse
 import voice_to_text
 import generate_ai_response
 from text_to_speech
+import tg_bot
+import logging
 
 def locale_language():
     language, _ = locale.getdefaultlocale()
@@ -22,11 +24,14 @@ def main():
         if command:
             # Text Handler (AI Response)
             ai_response = generate_ai_response.get_resp(command)
+            tg_bot.send_message(command)
+
             # logging.info(f"User said {command}")
 
             if ai_response:
                 print("AI Response:", ai_response)
-                text_to_voice.say_text(ai_response)
+                tg_bot.send_message(ai_response)
+                text_to_voice.say_text(f'Answer {ai_response}')
             else:
                 print("No AI Response. Try again.")
 
