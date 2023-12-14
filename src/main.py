@@ -2,7 +2,7 @@ import locale
 import argparse
 import voice_to_text
 import generate_ai_response
-from text_to_speech
+import text_to_speech
 import tg_bot
 import logging
 
