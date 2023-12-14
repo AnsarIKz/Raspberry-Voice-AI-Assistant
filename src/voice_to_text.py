@@ -30,12 +30,13 @@ def audio_capture():
             except Exception as e:
                 print(f"Error capturing audio: {e}")
 
+
 def recognize_audio():
     try:
         audio_data_frames = []
         while not audio_queue.empty():
             audio_data = audio_queue.get()
-            audio_data_frames.append(audio_data)
+            audio_data_frames.extend(audio_data.frame_data)
 
         audio_data_bytes = struct.pack('<' + 'h' * len(audio_data_frames), *audio_data_frames)
         vosk_recognizer.AcceptWaveform(audio_data_bytes)
@@ -52,6 +53,7 @@ def recognize_audio():
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
         return None
+
 
 if __name__ == "__main__":
     if not os.path.exists(model_path):
