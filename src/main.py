@@ -7,26 +7,26 @@ import tg_bot
 import logging
 import socket
 
-def get_ip_address():
-    try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect(('8.8.8.8', 80)) 
-        ip_address = s.getsockname()[0]
-        return ip_address
-    except Exception as e:
-        print(f"Ошибка при получении IP-адреса: {e}")
-        return None
-    finally:
-        s.close()
+# def get_ip_address():
+#     try:
+#         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+#         s.connect(('8.8.8.8', 80)) 
+#         ip_address = s.getsockname()[0]
+#         return ip_address
+#     except Exception as e:
+#         print(f"Ошибка при получении IP-адреса: {e}")
+#         return None
+#     finally:
+#         s.close()
 
 def locale_language():
     language, _ = locale.getdefaultlocale()
     return language
 
 def main():
-    ip = get_ip_address()
-    if ip:
-        tg_bot.send_message(f"Akif Assistant started on {ip}")
+    # ip = get_ip_address()
+    # if ip:
+    #     tg_bot.send_message(f"Akif Assistant started on {ip}")
 
     #inititalization
     voice_to_text.init()
