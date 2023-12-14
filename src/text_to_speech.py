@@ -5,6 +5,6 @@ voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[2].id)  # You can experiment with different indices
 engine.setProperty('rate', 130)
 
-text = "Hello, this is a text-to-speech example."
-engine.say(text)
-engine.runAndWait()
+def say_text(text):
+    engine.say(text)
+    engine.runAndWait()

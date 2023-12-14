@@ -1,6 +1,6 @@
 import os
 import sys
-import array
+import struct
 import speech_recognition as sr
 import vosk
 from dotenv import load_dotenv
@@ -21,9 +21,11 @@ def recognize_audio():
         audio_data = recognizer.listen(source)
 
     try:
-        audio_data_array = array.array('h', audio_data.frame_data)
-        vosk_recognizer.AcceptWaveform(audio_data_array)
+        audio_data_bytes = struct.pack('<' + 'h' * len(audio_data.frame_data), *audio_data.frame_data)
+        vosk_recognizer.AcceptWaveform(audio_data_bytes)
         result = vosk_recognizer.Result()
+
+        # Access the text using result["text"]
         result_text = result["text"]
 
         return result_text
@@ -33,6 +35,9 @@ def recognize_audio():
     except sr.RequestError as e:
         print(f"Error during Vosk recognition; {e}")
         return None
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        return None
 
 if __name__ == "__main__":
     if not os.path.exists(model_path):
@@ -40,7 +45,7 @@ if __name__ == "__main__":
         sys.exit(1)
 
     while True:
-        command = recognize_audio(model_path)
+        command = recognize_audio()
         if command:
             if "hello" in command.lower():
                 print("Hello! How can I help you?")

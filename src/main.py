@@ -1,21 +1,34 @@
 import locale
 import argparse
-import text_to_speech
+import voice_to_text
+import generate_ai_response
+import text_to_voice
 
 def locale_language():
     language, _ = locale.getdefaultlocale()
     return language
 
-
 def main():
-    logging.basicConfig(level=logging.DEBUG)
+    language = locale_language()
+    text_to_speech.say_text("Hi, i Am Akif assistaint.")
+    text_to_speech.say_text("What can i do for you.")
+    # logging.basicConfig(filename='telebot.log', level=logging.INFO,
+    #                 format='%(asctime)s - %(levelname)s - %(message)s')
 
-    parser = argparse.ArgumentParser(description='Assistant Akif.')
-    parser.add_argument('--language', default=locale_language())
-    args = parser.parse_args()
+    while True:
+        # Voice to Text
+        command = voice_to_text.recognize_audio()
 
-    logging.info('Init language %s...', args.language)
-    text_to_speech.say_text("Hi, i Am Akif assistaint. Do you have problems?")
+        if command:
+            # Text Handler (AI Response)
+            ai_response = generate_ai_response.get_resp(command)
+            # logging.info(f"User said {command}")
 
+            if ai_response:
+                print("AI Response:", ai_response)
+                text_to_voice.say_text(ai_response)
+            else:
+                print("No AI Response. Try again.")
 
-
+if __name__ == "__main__":
+    main()
