@@ -2,7 +2,7 @@ import locale
 import argparse
 import voice_to_text
 import generate_ai_response
-import text_to_voice
+import text_to_speech
 
 def locale_language():
     language, _ = locale.getdefaultlocale()
