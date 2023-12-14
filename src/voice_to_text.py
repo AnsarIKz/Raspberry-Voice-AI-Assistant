@@ -25,7 +25,7 @@ def recognize_audio(model_path):
         return None
 
 if __name__ == "__main__":
-    model_path = r'C:\\Users\\nansa\\Desktop\\AIY-Voice-Assistant\\src\\voice_models\\vosk0.15'
+    model_path = r'C:\Users\nansa\Desktop\AIY-Voice-Assistant\src\voice_models\vosk0.15'
 
     if not os.path.exists(model_path):
         print(f"Vosk model path {model_path} not found.")
