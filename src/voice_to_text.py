@@ -9,8 +9,8 @@ def recognize_audio(model_path):
     # Load Vosk model
     model = vosk.Model(model_path)
 
-    # Create Vosk recognizer
-    vosk_recognizer = vosk.KaldiRecognizer(model, model.get_sample_frequency())
+    # Create Vosk recognizer with a sample rate of 16000 (adjust as needed)
+    vosk_recognizer = vosk.KaldiRecognizer(model, 16000)
 
     with sr.Microphone() as source:
         print("Say something:")
@@ -18,7 +18,7 @@ def recognize_audio(model_path):
 
     try:
         # Perform Vosk recognition
-        result = vosk_recognizer.Recognize(audio_data.frame_data, 0)
+        result = vosk_recognizer.Recognize(audio_data.frame_data, 16000)
         result_text = result["text"]
         
         print("You said:", result_text)
