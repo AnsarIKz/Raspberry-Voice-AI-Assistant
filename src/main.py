@@ -27,6 +27,8 @@ def main():
     if ip:
         tg_bot.send_message(f"Akif Assistant started on {ip}")
 
+    #inititalization
+    voice_to_text.init()
     language = locale_language()
     text_to_speech.say_text("Hi, i Am Akif assistaint.")
     text_to_speech.say_text("What can i do for you.")

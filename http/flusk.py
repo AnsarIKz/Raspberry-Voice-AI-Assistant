@@ -11,7 +11,7 @@ app = Flask(__name__, template_folder = 'template')
 def memory_usage_task():
     """Фоновая задача для отправки информации о занятой памяти."""
     while True:
-        memory_usage = psutil.virtual_memory().percent
+        memory_usage = psutil.virtual_memory()
         requests.post(f'https://api.thingspeak.com/update?api_key={THINGSPEAK_API_KEY}&field1={(memory_usage)}')
         time.sleep(30)
 

@@ -12,7 +12,7 @@ model = vosk.Model(model_path)
 vosk_recognizer = vosk.KaldiRecognizer(model, 16000)
 
 def init():
-    
+    return True
 
 def recognize_audio():
     recognizer = sr.Recognizer()
