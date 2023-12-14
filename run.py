@@ -1,11 +1,16 @@
 import threading
 import subprocess
+import os
 
+current_directory = os.getcwd()
+
+main_script_path = os.path.join(current_directory, "src", "main.py")
+webserver_script_path = os.path.join(current_directory, "http", "webserver.py")
 def run_main():
-    subprocess.run(["python", "/src/main.py"])
+    subprocess.run(["python", main_script_path])
 
 def run_webserver():
-    subprocess.run(["python", "/http/webserver.py"])
+    subprocess.run(["python", webserver_script_path])
 
 if __name__ == "__main__":
     # Создаем два потока для выполнения main.py и webserver.py
