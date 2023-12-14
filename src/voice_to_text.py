@@ -8,6 +8,9 @@ load_dotenv()
 model_path = os.getenv("MODEL_PATH")
 model = Model(model_path)
 
+def init():
+    return True
+
 class VoskRecognizer(sr.Recognizer):
     def recognize_vosk(self, audio_data, show_all=False):
         sample_frequency = 16000  # Replace with the actual sample frequency of your model
