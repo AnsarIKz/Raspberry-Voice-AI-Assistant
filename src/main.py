@@ -50,7 +50,7 @@ def main():
             if ai_response:
                 print("AI Response:", ai_response)
                 tg_bot.send_message(ai_response)
-                text_to_voice.say_text(f'Answer {ai_response}')
+                text_to_speech.say_text(f'Answer {ai_response}')
             else:
                 print("No AI Response. Try again.")
 
