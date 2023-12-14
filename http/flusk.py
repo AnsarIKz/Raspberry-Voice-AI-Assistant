@@ -12,6 +12,8 @@ def memory_usage_task():
     """Фоновая задача для отправки информации о занятой памяти."""
     while True:
         memory_usage = psutil.virtual_memory()
+        cpu_usage = psutil.cpu_percent()
+        requests.post(f'https://api.thingspeak.com/update?api_key={THINGSPEAK_API_KEY}&field2={(cpu_usage)}')
         requests.post(f'https://api.thingspeak.com/update?api_key={THINGSPEAK_API_KEY}&field1={(memory_usage)}')
         time.sleep(30)
 
