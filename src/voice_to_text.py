@@ -18,9 +18,13 @@ def recognize_audio(model_path):
 
     try:
         # Perform Vosk recognition
-        result = vosk_recognizer.Recognize(audio_data.frame_data, 16000)
+        audio_data = audio_data.frame_data.tobytes()
+        vosk_recognizer.AcceptWaveform(audio_data)
+
+        # Get the final result
+        result = vosk_recognizer.Result()
         result_text = result["text"]
-        
+
         print("You said:", result_text)
         return result_text
     except sr.UnknownValueError:
