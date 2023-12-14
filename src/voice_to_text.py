@@ -8,13 +8,10 @@ load_dotenv()
 model_path = os.getenv("MODEL_PATH")
 model = Model(model_path)
 
-def init():
-    return True
-
 class VoskRecognizer(sr.Recognizer):
-    def recognize_vosk(self, audio_data, language="en-US", show_all=False):
-        print(model)
-        vosk_recognizer = KaldiRecognizer(model, model.sample_frequency)
+    def recognize_vosk(self, audio_data, show_all=False):
+        sample_frequency = 16000  # Replace with the actual sample frequency of your model
+        vosk_recognizer = KaldiRecognizer(model, sample_frequency)
         result = vosk_recognizer.AcceptWaveform(audio_data.frame_data)
 
         if show_all:
