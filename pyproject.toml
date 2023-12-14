@@ -6,7 +6,7 @@ authors = ["Ansar Nurzhanov <nansarik@mail.ru>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "3.7.0"
+python = "3.7.3"
 vosk = "^0.3.45"
 sounddevice = "^0.4.6"
 urllib3 = "1.25.11"
