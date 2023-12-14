@@ -8,6 +8,9 @@ load_dotenv()
 model_path = os.getenv("MODEL_PATH")
 model = Model(model_path)
 
+def init():
+    return True
+
 class VoskRecognizer(sr.Recognizer):
     def recognize_vosk(self, audio_data, language="en-US", show_all=False):
         vosk_recognizer = KaldiRecognizer(model, model.get_sample_frequency())
