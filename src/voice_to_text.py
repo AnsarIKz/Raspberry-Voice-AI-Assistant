@@ -1,16 +1,19 @@
 import os
 import sys
+import array
 import speech_recognition as sr
 import vosk
-import numpy as np
+from dotenv import load_dotenv
 
-def recognize_audio(model_path):
+load_dotenv()
+
+model_path = os.getenv("MODEL_PATH")
+
+def recognize_audio():
     recognizer = sr.Recognizer()
 
     # Load Vosk model
     model = vosk.Model(model_path)
-
-    # Create Vosk recognizer with a sample rate of 16000 (adjust as needed)
     vosk_recognizer = vosk.KaldiRecognizer(model, 16000)
 
     with sr.Microphone() as source:
@@ -18,15 +21,11 @@ def recognize_audio(model_path):
         audio_data = recognizer.listen(source)
 
     try:
-        # Perform Vosk recognition
-        audio_data_np = np.frombuffer(audio_data.frame_data, dtype=np.int16)
-        vosk_recognizer.AcceptWaveform(audio_data_np)
-
-        # Get the final result
+        audio_data_array = array.array('h', audio_data.frame_data)
+        vosk_recognizer.AcceptWaveform(audio_data_array)
         result = vosk_recognizer.Result()
         result_text = result["text"]
 
-        print("You said:", result_text)
         return result_text
     except sr.UnknownValueError:
         print("Sorry, could not understand audio.")
@@ -36,8 +35,6 @@ def recognize_audio(model_path):
         return None
 
 if __name__ == "__main__":
-    model_path = r'C:\Users\nansa\Desktop\AIY-Voice-Assistant\src\voice_models\vosk0.15'
-
     if not os.path.exists(model_path):
         print(f"Vosk model path {model_path} not found.")
         sys.exit(1)
