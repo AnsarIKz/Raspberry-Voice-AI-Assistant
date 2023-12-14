@@ -5,6 +5,7 @@ import generate_ai_response
 import text_to_speech
 import tg_bot
 import logging
+import socket
 
 def get_ip_address():
     try:
