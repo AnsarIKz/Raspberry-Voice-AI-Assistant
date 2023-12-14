@@ -19,4 +19,4 @@ def get_resp(example):
     else :
         return false
 
-#print(get_resp("who is joe biden"))
+#print(get_resp("помогите"))

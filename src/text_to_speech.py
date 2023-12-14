@@ -1,5 +1,10 @@
-from aiy.voice.tts import say
+import pyttsx3
 
-def say_text(text, language_code):
-    say(text, lang=language_code, voice_id='en-US-Wavenet-D', volume=60, pitch=130, speed=100, device='default')
-    return text
+engine = pyttsx3.init()
+voices = engine.getProperty('voices')
+engine.setProperty('voice', voices[2].id)  # You can experiment with different indices
+engine.setProperty('rate', 130)
+
+text = "Hello, this is a text-to-speech example."
+engine.say(text)
+engine.runAndWait()
