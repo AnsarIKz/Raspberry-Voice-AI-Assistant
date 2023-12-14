@@ -33,6 +33,7 @@ def main():
     language = locale_language()
     text_to_speech.say_text("Hi, i Am Akif assistaint.")
     text_to_speech.say_text("What can i do for you.")
+    tg_bot.send_message('Akif is working now')
     # logging.basicConfig(filename='telebot.log', level=logging.INFO,
     #                 format='%(asctime)s - %(levelname)s - %(message)s')
 

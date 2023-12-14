@@ -15,7 +15,7 @@ class VoskRecognizer(sr.Recognizer):
     def recognize_vosk(self, audio_data, show_all=False):
         sample_frequency = audio_data.sample_rate
         vosk_recognizer = KaldiRecognizer(model, sample_frequency)
-        result = vosk_recognizer.AcceptWaveform(audio_data.frame_data.tobytes())
+        result = vosk_recognizer.AcceptWaveform(audio_data)
 
         if show_all:
             return result
@@ -28,6 +28,7 @@ def recognize_audio():
     with sr.Microphone() as source:
         print("Say something:")
         audio_data = recognizer.listen(source)
+        print(audio_data)
 
     try:
         result = recognizer.recognize_vosk(audio_data)
