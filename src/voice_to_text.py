@@ -13,9 +13,9 @@ def init():
 
 class VoskRecognizer(sr.Recognizer):
     def recognize_vosk(self, audio_data, show_all=False):
-        sample_frequency = 216  # Replace with the actual sample frequency of your model
+        sample_frequency = audio_data.sample_rate
         vosk_recognizer = KaldiRecognizer(model, sample_frequency)
-        result = vosk_recognizer.AcceptWaveform(audio_data.frame_data)
+        result = vosk_recognizer.AcceptWaveform(audio_data.frame_data.tobytes())
 
         if show_all:
             return result
