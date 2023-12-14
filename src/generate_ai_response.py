@@ -15,8 +15,8 @@ def query(payload) :
 def get_resp(example):
     answer = query(example)
     if answer :
-        print(answer)
+        return answer
     else :
-        print("No valid answer found in the response.")
+        return false
 
 #print(get_resp("who is joe biden"))
