@@ -1,0 +1,8 @@
+# Игнорировать файл lock poetry
+poetry.lock
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
