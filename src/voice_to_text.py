@@ -8,13 +8,15 @@ from dotenv import load_dotenv
 load_dotenv()
 
 model_path = os.getenv("MODEL_PATH")
+model = vosk.Model(model_path)
+vosk_recognizer = vosk.KaldiRecognizer(model, 16000)
+
+def init():
+    
 
 def recognize_audio():
     recognizer = sr.Recognizer()
 
-    # Load Vosk model
-    model = vosk.Model(model_path)
-    vosk_recognizer = vosk.KaldiRecognizer(model, 16000)
 
     with sr.Microphone() as source:
         print("Say something:")
