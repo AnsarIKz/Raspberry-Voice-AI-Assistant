@@ -2,6 +2,7 @@ import os
 import sys
 import speech_recognition as sr
 import vosk
+import numpy as np
 
 def recognize_audio(model_path):
     recognizer = sr.Recognizer()
@@ -18,8 +19,8 @@ def recognize_audio(model_path):
 
     try:
         # Perform Vosk recognition
-        audio_data = audio_data.frame_data.tobytes()
-        vosk_recognizer.AcceptWaveform(audio_data)
+        audio_data_np = np.frombuffer(audio_data.frame_data, dtype=np.int16)
+        vosk_recognizer.AcceptWaveform(audio_data_np)
 
         # Get the final result
         result = vosk_recognizer.Result()
