@@ -1,4 +1,4 @@
-# AIY-Voice-Assistant
+# Raspberry-Voice-AI-Assistant
 
 
 > How to start?
